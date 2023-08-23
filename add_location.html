@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+    <head>        
+        <meta charset="utf-8" />
+        <title>Add Locations</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+<link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Bootstrap Css -->
+<link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<!-- Icons Css -->
+<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<style>
+    .main-content{
+        margin:0 !important;
+    }
+    
+    a[title^='Hosted on']{
+        display:none;
+    }
+</style>
+<!-- DataTables -->
+    </head>
+
+    <body data-sidebar="dark">
+    
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">                    
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+<style>
+.vertical-menu{
+    top:0;
+}
+.page-content{
+    padding:calc(20px + 24px) calc(24px / 2) 60px calc(24px / 2);
+}
+.form-invalid{        
+border-color: #ff3d60;
+padding-right: calc(1.5em + .94rem);
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ff3d60'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff3d60' stroke='none'/%3e%3c/svg%3e");
+background-repeat: no-repeat;
+background-position: right calc(.375em + .235rem) center;
+background-size: calc(.75em + .47rem) calc(.75em + .47rem);
+}
+.form-valid{
+    border-color: #0ac074;
+padding-right: calc(1.5em + .94rem);
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%230ac074' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+background-repeat: no-repeat;
+background-position: right calc(.375em + .235rem) center;
+background-size: calc(.75em + .47rem) calc(.75em + .47rem);
+}
+.toast{
+    width: 350px;
+max-width: 100%;
+font-size: .875rem;
+pointer-events: auto;
+background-color:unset !important;
+background-clip: unset !important;
+border: unset !important;
+-webkit-box-shadow: unset !important;
+box-shadow: unset !important;
+border-radius: unset !important;
+position: fixed !important;
+    z-index: 1;
+}
+table.dataTable.nowrap th, table.dataTable.nowrap td{
+    white-space: break-spaces !important;
+}
+.update_location{
+    width: 30%;
+    margin-right:1rem ;
+}
+.delete_location{
+    width: 40%;
+}
+@media only screen and (max-width: 600px) {
+    .update_location{
+    width: 100%;
+}
+.delete_location{
+    width: 100%;
+}
+}
+</style>
+
+<div style="z-index: 11">
+<div id="borderedToast1" class="toast overflow-hidden position-absolute p-3 top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="align-items-center text-white bg-primary border-0">
+    <div class="d-flex">
+        <div class="toast-body" id="toast-text">
+            Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+</div>
+</div>
+            <div class="main-content">            
+
+                <div class="page-content">
+                    <div class="container-fluid">
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Settings</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="card">
+                                    <div class="card-body row d-flex">                                                
+                                        <div class="col-md-2">
+                                            <h5>API Setting</h5>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <input class="form-check form-switch" type="checkbox" id="api_setting" switch="none">
+                                            <label class="form-label" for="api_setting" data-on-label="On" data-off-label="Off"></label>
+                                            <script>
+
+                                                $(document).ready(function(){
+                                                    $.ajax({
+                                                        type:'post',
+                                                        url:'includes/data_control.php',
+                                                        // url:'includes/data_control.php',
+                                                        data:{formName:'api_setting_enable'},
+                                                        success:function(data){
+                                                            if(data==1){
+                                                                $('#api_setting').prop('checked', true);
+                                                                $('#api_setting').val(1);
+                                                            }else{
+                                                                $('#api_setting').prop('checked', false);
+                                                                $('#api_setting').val(0);
+                                                            }
+                                                        }
+                                                    })
+                                                })
+
+                                            </script>
+                                        </div>
+
+                                        <div class="col-md-6 row d-none">
+                                            <div class="col-md-3">
+                                            <label for="example-text-input" class="col-form-label">New API Token</label>
+                                        </div>
+                                            <div class="col-md-7">
+                                                <input class="form-control" type="text" value="" id="token" placeholder="Token">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input class="form-control btn btn-primary" type="button" value="Submit" id="distance_fetch">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="card">
+                                    <div class="card-body row d-flex align-items-end">                                                
+                                        <div class="col-md-4">
+                                            <label for="example-text-input" class="col-form-label">New API Token</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="text" value="" id="token" placeholder="Token">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">                                            
+                                            <div class="col-md-8">
+                                                <input class="form-control btn btn-primary" type="button" value="Submit" id="distance_fetch">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div> <!-- end col -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">New Location</h4>
+
+                                    <!-- <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Distance Calculator</a></li>
+                                            <li class="breadcrumb-item active">Add Location</li>
+                                        </ol>
+                                    </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="location_form">
+                        <div class="row" id="form-parent">
+                            <div class="col-12" id="form-child">
+                                <div class="card">
+                                    <div class="card-body row">                                                
+                                        <div class="col-md-3">
+                                            <label for="example-text-input" class="col-form-label">Organisation Name</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" value="" id="org_name" placeholder="Organisation Name">
+                                                <div class="invalid-feedback">
+                                                            Please Provide a Organisation Name.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="example-search-input" class="col-form-label">Sub Urb</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" value="" id="sub_urb" placeholder="Sub Urb Name">
+                                                <div class="invalid-feedback">
+                                                            Please Provide a Sub Urb Name.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="example-search-input" class="col-form-label">Address</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" value="" id="address" placeholder="Address">
+                                                <div class="invalid-feedback">
+                                                            Please Provide a Address.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="example-search-input" class="col-form-label">Facility</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="text" value="" id="facility" placeholder="Facility Name">
+                                                <div class="invalid-feedback">
+                                                            Please Provide a Faciity Name.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="example-search-input" class="col-form-label">Facility Type</label>
+                                            <div class="col-md-10">
+                                                <select name="facility_type" class="form-control" id="facility_type">
+                                                    <option value="0">--select--</option>
+                                                    <option value="1">Aged Care High</option>
+                                                    <option value="2">Aged Care Low</option>
+                                                    <option value="3">Disability</option>
+                                                </select>
+                                                <div class="invalid-feedback">
+                                                            Please Select a Faciity Type.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="example-search-input" class="col-form-label">Latitude</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="tel" value="" id="latitude" placeholder="Latitude">   
+                                                <div class="invalid-feedback">
+                                                            Please Provide the Latitude of the Location.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="example-search-input" class="col-form-label">Longitude</label>
+                                            <div class="col-md-10">
+                                                <input class="form-control" type="tel" value="" id="longitude" placeholder="Longitude">
+                                                <div class="invalid-feedback">
+                                                            Please Provide the Longitude of the Location.
+                                                        </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row col-form-label">                                            
+                                            <div class="col-md-2 save-fields">
+                                                <input class="form-control btn btn-primary" type="button" value="Submit" onclick="add_location()">
+                                                <button type="button" class="btn btn-primary d-none" id="borderedToast1Btn"></button>
+                                            </div>
+                                            <div class="col-md-3 update_field" style="display: none;">
+                                                <input class="form-control btn btn-info" style="margin-right: 10px;" type="button" value="Update" onclick="add_location()">
+                                                <input class="form-control btn btn-secondary" type="button" value="Reset" id="reset_location">
+                                                <input class="update_setting" type="hidden" value="0" id="update_setting">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->
+                    </form>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                        
+                            <table id="datatable" class="table table-striped table-bordered nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                            <thead>
+                                            <tr>
+                                                <th style="width: 15%;">Organisation Name</th>
+                                                <th style="width: 15%;">Sub Urb</th>
+                                                <th style="width: 10%;">Address</th>
+                                                <th style="width: 10%;">Facility</th>
+                                                <th style="width: 10%;">Facility Type</th>
+                                                <th style="width: 10%;">Latitude</th>
+                                                <th style="width: 10%;">Longitude</th>
+                                                <th style="width: 5%;">Enable</th>                                                
+                                                <th style="width: 15%;">Action</th>
+                                            </tr>
+                                            </thead>
+        
+        
+                                            <tbody>
+                                            <!-- <tr>
+                                                <td>AMB</td>
+                                                <td>Sample Sub</td>
+                                                <td>Sample Address</td>
+                                                <td>Faciity name</td>
+                                                <td>17.546546</td>
+                                                <td>15.546546</td>
+                                                <td><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
+                                            </tr> -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script>
+            
+            $(document).ready(function () {
+                $('#datatable').DataTable({lengthMenu: [5, 10, 20],language:{paginate:{previous:"<i class='mdi mdi-chevron-left'>",next:"<i class='mdi mdi-chevron-right'>"}},drawCallback:function(){$(".dataTables_paginate > .pagination").addClass("pagination-rounded")},
+                scrollX:true,
+                    // ajax: 'includes/data_control.php',
+                    ajax: 'includes/data_control.php',
+                        columns: [
+                        { data: 'org_name' },                                    
+                        { data: 'sub_urb' },
+                        { data: 'address' },
+                        { data: 'facility' },
+                        { data: 'facility_type' },
+                        { data: 'latitude' },
+                        { data: 'longitude' },  
+                        { data: 'option' },             
+                        { data: 'action_btn' },
+                    ],
+                });
+            })
+        </script>
+        <!-- END layout-wrapper -->
+        <script>
+
+        $('#latitude,#longitude').on('input',function(){
+            this.value = this.value.replace(/[^0-9-,\.]/g,'');
+        })
+
+            function add_location(){
+                var org_name=$('#org_name').val();
+                var sub_urb=$('#sub_urb').val();
+                var address=$('#address').val();
+                var facility=$('#facility').val();
+                var latitude=$('#latitude').val();
+                var longitude=$('#longitude').val();
+                var facility_type=$('#facility_type').val()==0 ? '' :$('#facility_type').val() ;
+
+                if(org_name=='' || sub_urb=='' || address=='' || facility=='' || latitude=='' || longitude=='' || facility_type=='' ){
+
+                    if(org_name==''){
+                        $('#org_name').parents('div').children('.invalid-feedback').show();
+                        $('#org_name').removeClass('form-valid');
+                        $('#org_name').addClass('form-invalid');
+                    }else{
+                        $('#org_name').parents('div').children('.invalid-feedback').hide();
+                        $('#org_name').addClass('form-valid');
+                        $('#org_name').removeClass('form-invalid');
+                    }
+                    if(sub_urb==''){
+                        $('#sub_urb').parents('div').children('.invalid-feedback').show();
+                        $('#sub_urb').removeClass('form-valid');
+                        $('#sub_urb').addClass('form-invalid');
+                    }else{
+                        $('#sub_urb').parents('div').children('.invalid-feedback').hide();
+                        $('#sub_urb').addClass('form-valid');
+                        $('#sub_urb').removeClass('form-invalid');
+                    }
+                    if(address==''){
+                        $('#address').parents('div').children('.invalid-feedback').show();
+                        $('#address').removeClass('form-valid');
+                        $('#address').addClass('form-invalid');
+                    }else{
+                        $('#address').parents('div').children('.invalid-feedback').hide();
+                        $('#address').addClass('form-valid');
+                        $('#address').removeClass('form-invalid');
+                    }
+                    if(facility==''){
+                        $('#facility').parents('div').children('.invalid-feedback').show();
+                        $('#facility').removeClass('form-valid');
+                        $('#facility').addClass('form-invalid');
+                    }else{
+                        $('#facility').parents('div').children('.invalid-feedback').hide();
+                        $('#facility').addClass('form-valid');
+                        $('#facility').removeClass('form-invalid');
+                    }
+                    if(facility_type==''){
+                        $('#facility_type').parents('div').children('.invalid-feedback').show();
+                        $('#facility_type').removeClass('form-valid');
+                        $('#facility_type').addClass('form-invalid');
+                    }else{
+                        $('#facility_type').parents('div').children('.invalid-feedback').hide();
+                        $('#facility_type').addClass('form-valid');
+                        $('#facility_type').removeClass('form-invalid');
+                    }
+                    if(latitude==''){
+                        $('#latitude').parents('div').children('.invalid-feedback').show();
+                        $('#latitude').removeClass('form-valid');
+                        $('#latitude').addClass('form-invalid');
+                    }else{
+                        $('#latitude').parents('div').children('.invalid-feedback').hide();
+                        $('#latitude').addClass('form-valid');
+                        $('#latitude').removeClass('form-invalid');
+                    }
+                    if(longitude==''){
+                        $('#longitude').parents('div').children('.invalid-feedback').show();
+                        $('#longitude').removeClass('form-valid');
+                        $('#longitude').addClass('form-invalid');
+                    }else{
+                        $('#longitude').parents('div').children('.invalid-feedback').hide();
+                        $('#longitude').addClass('form-valid');
+                        $('#longitude').removeClass('form-invalid');
+                    }
+
+                }else{
+
+                    var updateStatus=$('#update_setting').val();                    
+
+                    $.ajax({
+                        type:'post',
+                        url:'includes/data_control.php',
+                        // url:'includes/data_control.php',
+                        data:{org_name:org_name,updateStatus:updateStatus,facility_type:facility_type,sub_urb:sub_urb,address:address,facility:facility,latitude:latitude,longitude:longitude,formName:'insert_location'},
+                        success:function(data){
+
+                            if(data==1){
+                                $("#form-parent").load(location.href + " #form-child");
+                                if(updateStatus==0){
+                                    $('#toast-text').html('New Location added Successfully');
+                                }else{
+                                    $('#toast-text').html('Record Updated Successfully');
+                                }
+                                $('#borderedToast1Btn').trigger('click');
+                                var table = $('#datatable').DataTable();
+                                    table.ajax.reload();
+                                    
+                            }else{
+                                alert('error occurred');
+                            }
+
+                        }
+                    })                        
+
+
+                }
+            }
+
+            $(document).on('change','.location_switch',function(){
+                var id=$(this).attr('data');
+                var switched = $(this).val();
+                $.ajax({
+                        type:'post',
+                        url:'includes/data_control.php',
+                        data:{location_id:id,switched:switched,formName:'location_switch'},
+                        success:function(data){
+                            if(data==1){
+                            var table = $('#datatable').DataTable();
+                                    table.ajax.reload();
+                            }else{
+                                alert('An error Encountered');
+                            }
+                        }
+                    })
+            })
+
+            $(document).on('click','.update_location',function(){
+                $('#org_name').val($(this).closest("tr").children().eq(0).html());
+                $('#sub_urb').val($(this).closest("tr").children().eq(1).html());
+                $('#address').val($(this).closest("tr").children().eq(2).html());
+                $('#facility').val($(this).closest("tr").children().eq(3).html());
+                $('#facility_type').val($(this).closest("tr").children().eq(4).children().attr('id')).change();
+                $('#latitude').val($(this).closest("tr").children().eq(5).html());
+                $('#longitude').val($(this).closest("tr").children().eq(6).html());
+                $('.save-fields').hide();
+                $('.update_field').css('display','flex');
+                $('#update_setting').val($(this).attr('data'));
+                element=document.getElementById('form-child');
+                element.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+            })
+
+            $(document).on('click','#reset_location',function(){
+                document.getElementById('location_form').reset();
+                $('.save-fields').show();
+                $('.update_field').hide();
+                $('#update_setting').val(0);
+            })
+
+            function delete_loc(id){
+
+                $.ajax({
+                        type:'post',
+                        // url:'includes/data_control.php',
+                        url:'includes/data_control.php',
+                        data:{location_id:id,formName:'delete_location'},
+                        success:function(data){
+                            if(data==1){
+                            var table = $('#datatable').DataTable();
+                                    table.ajax.reload();
+                            }else{
+                                alert('An error Encountered');
+                            }
+                        }
+                    })
+            }
+
+
+            $('#api_setting').on('click',function(){    
+                $('#api_setting').prop('disabled',true);
+                if($(this).val()=='1'){                    
+                    $(this).val('0');
+                }else{                    
+                    $(this).val('1');
+                }
+                var switch_check=$(this).val();
+                $.ajax({
+                    type:'post',
+                    url:'includes/data_control.php',
+                    // url:'includes/data_control.php',
+                    data:{formName:'api_setting',setting:switch_check},
+                    success:function(data){
+                        if(data==1){
+                            $('#toast-text').html('API Settings Updated');
+                            $('#borderedToast1Btn').trigger('click');
+                            $('#api_setting').prop('disabled',false);
+                        }else{
+                            alert('An error encountered');
+                            $('#api_setting').prop('disabled',false);
+                        }
+                    }
+                })
+
+            })
+
+        </script>
+        <!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+
+
+<script src="assets/js/pages/bootstrap-toasts.init.js"></script>
+
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+
+
+<!-- Required datatable js -->
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+<script src="assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js"></script>
+<!-- Responsive examples -->
+<script src="assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
+
+<!-- Datatable init js -->
+<!-- <script src="assets/js/pages/datatables.init.js"></script> -->
+<!-- <script src="assets/js/pages/datatables.init.js"></script> -->
+
+<script src="assets/js/app.js"></script>
+    </body>
+
+</html>

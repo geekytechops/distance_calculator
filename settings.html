@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+    <head>        
+        <meta charset="utf-8" />
+        <title>Settings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesdesign" name="author" />
+        <!-- App favicon -->
+<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+<link href="assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+
+<!-- Bootstrap Css -->
+<link href="assets/css/bootstrap.min.css" id="bootstrap-style" rel="stylesheet" type="text/css" />
+<!-- Icons Css -->
+<link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+<!-- App Css-->
+<link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<!-- DataTables -->
+    </head>
+    <body data-sidebar="dark">
+    
+    <!-- <body data-layout="horizontal" data-topbar="dark"> -->
+
+        <!-- Begin page -->
+        <div id="layout-wrapper">                    
+            <!-- ============================================================== -->
+            <!-- Start right Content here -->
+            <!-- ============================================================== -->
+            <!-- ========== Left Sidebar Start ========== -->
+<div class="vertical-menu">
+
+<div data-simplebar class="h-100">
+
+    <!--- Sidemenu -->
+    <div id="sidebar-menu">
+        <!-- Left Menu Start -->
+        <ul class="metismenu list-unstyled" id="side-menu">
+            <li class="menu-title">MENU</li>                
+            <li>
+                <a href="index.html" class="waves-effect">
+                    <i class="ri-user-location-fill"></i>                                    
+                    <span>Distance Calculator</span>
+                </a>
+            </li>                           
+            <li>
+                <a href="add_location.html" class="waves-effect">
+                    <i class="ri-pin-distance-fill"></i>                                    
+                    <span>Add Location</span>
+                </a>
+            </li>                           
+            <li>
+                <a href="settings.html" class="waves-effect">
+                    <i class="ri-settings-4-fill"></i>                                    
+                    <span>Settings</span>
+                </a>
+            </li>                                       
+        </ul>
+    </div>
+    <!-- Sidebar -->
+</div>
+</div>
+<!-- Left Sidebar End -->
+<style>
+.vertical-menu{
+    top:0;
+}
+.page-content{
+    padding:calc(20px + 24px) calc(24px / 2) 60px calc(24px / 2);
+}
+.form-invalid{        
+border-color: #ff3d60;
+padding-right: calc(1.5em + .94rem);
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23ff3d60'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23ff3d60' stroke='none'/%3e%3c/svg%3e");
+background-repeat: no-repeat;
+background-position: right calc(.375em + .235rem) center;
+background-size: calc(.75em + .47rem) calc(.75em + .47rem);
+}
+.form-valid{
+    border-color: #0ac074;
+padding-right: calc(1.5em + .94rem);
+background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%230ac074' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+background-repeat: no-repeat;
+background-position: right calc(.375em + .235rem) center;
+background-size: calc(.75em + .47rem) calc(.75em + .47rem);
+}
+.toast{
+    width: 350px;
+max-width: 100%;
+font-size: .875rem;
+pointer-events: auto;
+background-color:unset !important;
+background-clip: unset !important;
+border: unset !important;
+-webkit-box-shadow: unset !important;
+box-shadow: unset !important;
+border-radius: unset !important;
+}
+</style>
+
+<div style="z-index: 11">
+<div id="borderedToast1" class="toast overflow-hidden position-absolute p-3 top-0 end-0" role="alert" aria-live="assertive" aria-atomic="true">
+<div class="align-items-center text-white bg-primary border-0">
+    <div class="d-flex">
+        <div class="toast-body" id="toast-text">
+            Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+</div>
+</div>
+</div>
+            <div class="main-content">            
+
+                <div class="page-content">
+                    <div class="container-fluid">
+                    <button type="button" class="btn btn-primary d-none" id="borderedToast1Btn"></button>
+
+                        <!-- start page title -->
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                    <h4 class="mb-sm-0">Settings</h4>
+
+                                    <div class="page-title-right">
+                                        <ol class="breadcrumb m-0">
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Distance Calculator</a></li>
+                                            <li class="breadcrumb-item active">Settings</li>
+                                        </ol>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end page title -->
+
+                        <div class="row">
+                            <div class="col-12">
+
+                                <div class="card">
+                                    <div class="card-body row d-flex">                                                
+                                        <div class="col-md-2">
+                                            <h5>API Setting</h5>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <input class="form-check form-switch" type="checkbox" id="api_setting" switch="none">
+                                            <label class="form-label" for="api_setting" data-on-label="On" data-off-label="Off"></label>
+                                            <script>
+
+                                                $(document).ready(function(){
+                                                    $.ajax({
+                                                        type:'post',
+                                                        url:'https://geekytechops.000webhostapp.com/data_control.php',
+                                                        // url:'includes/data_control.php',
+                                                        data:{formName:'api_setting_enable'},
+                                                        success:function(data){
+                                                            if(data==1){
+                                                                $('#api_setting').prop('checked', true);
+                                                                $('#api_setting').val(1);
+                                                            }else{
+                                                                $('#api_setting').prop('checked', false);
+                                                                $('#api_setting').val(0);
+                                                            }
+                                                        }
+                                                    })
+                                                })
+
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-body row d-flex align-items-end">                                                
+                                        <div class="col-md-4">
+                                            <label for="example-text-input" class="col-form-label">New API Token</label>
+                                            <div class="col-md-12">
+                                                <input class="form-control" type="text" value="" id="token" placeholder="Token">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">                                            
+                                            <div class="col-md-8">
+                                                <input class="form-control btn btn-primary" type="button" value="Submit" id="distance_fetch">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+                        </div>
+                        <!-- end row -->                                                                     
+                    </div>
+                    <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+            </div>
+            <!-- end main content-->
+
+        </div>
+        <!-- END layout-wrapper -->        
+        <script>
+
+
+            $('#api_setting').on('click',function(){    
+                $('#api_setting').prop('disabled',true);
+                if($(this).val()=='1'){                    
+                    $(this).val('0');
+                }else{                    
+                    $(this).val('1');
+                }
+                var switch_check=$(this).val();
+                $.ajax({
+                    type:'post',
+                    url:'https://geekytechops.000webhostapp.com/data_control.php',
+                    // url:'includes/data_control.php',
+                    data:{formName:'api_setting',setting:switch_check},
+                    success:function(data){
+                        if(data==1){
+                            $('#toast-text').html('API Settings Updated');
+                            $('#borderedToast1Btn').trigger('click');
+                            $('#api_setting').prop('disabled',false);
+                        }else{
+                            alert('An error encountered');
+                            $('#api_setting').prop('disabled',false);
+                        }
+                    }
+                })
+
+            })
+        </script>
+        <!-- JAVASCRIPT -->
+<script src="assets/libs/jquery/jquery.min.js"></script>
+<script src="assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/libs/metismenu/metisMenu.min.js"></script>
+<script src="assets/libs/simplebar/simplebar.min.js"></script>
+<script src="assets/libs/node-waves/waves.min.js"></script>
+
+
+<script src="assets/js/pages/bootstrap-toasts.init.js"></script>
+
+<script src="assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+<!-- <script src="assets/js/pages/datatables.init.js"></script> -->
+
+<script src="assets/js/app.js"></script>
+    </body>
+
+</html>
